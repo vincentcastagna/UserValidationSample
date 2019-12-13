@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UserValidation.Views.MainPage"
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:constants="clr-namespace:UserValidation;assembly=UserValidation"
+             xmlns:converters="clr-namespace:UserValidation.Converters;assembly=UserValidation"
+             xmlns:androidSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             BackgroundColor="#203E5F"
+             Title="DataAnnotations">
+
+    <ContentPage.Resources>
+        <converters:NullToVisibilityNoneConverter x:Key="NullToVisibilityNone" />
+        <OnPlatform x:Key="MaterialFontFamily" x:TypeArguments="x:String">
+            <On Platform="iOS" Value="Material Icons" />
+            <On Platform="Android" Value="MaterialIcons-Regular.ttf#Material Icons" />
+            <On Platform="UWP" Value="Assets/Fonts/MaterialIcons-Regular.ttf#Material Icons" />
+        </OnPlatform>
+        <Style TargetType="inputLayout:SfTextInputLayout">
+            <Setter Property="UnfocusedColor" Value="White"/>
+            <Setter Property="IsHintAlwaysFloated" Value="True"/>
+            <Setter Property="ErrorColor" Value="Red" />
+            <Setter Property="FocusedColor" Value="Orange"/>
+        </Style>
+        <Style ApplyToDerivedTypes="True" TargetType="Button">
+            <Setter Property="androidSpecific:Button.UseDefaultPadding" Value="True"/>
+            <Setter Property="androidSpecific:Button.UseDefaultShadow" Value="True"/>
+        </Style>
+    </ContentPage.Resources>
+    <ScrollView>
+        <StackLayout Margin="0,0,0,0" Padding="10,10" Spacing="10">
+            <inputLayout:SfTextInputLayout
+                x:Name="emailLayout"
+                ContainerType="Outlined"
+                Hint="Email"
+                HasError="{Binding User.Errors.[Email], Converter={StaticResource NullToVisibilityNone}}"
+                ErrorText="{Binding User.Errors.[Email]}"                                
+                LeadingViewPosition="Outside">
+                <Entry x:Name="emailEntry"
+                       Text="{Binding User.Email}"
+                       TextColor="White" />
+
+                <inputLayout:SfTextInputLayout.LeadingView>
+                    <Label
+                        TextColor="White"
+                        FontSize="20"
+                        FontFamily="{StaticResource MaterialFontFamily}"
+                       Text="{x:Static constants:IconFont.Email}">
+                    </Label>
+                </inputLayout:SfTextInputLayout.LeadingView>
+
+            </inputLayout:SfTextInputLayout>
+            <inputLayout:SfTextInputLayout
+                x:Name="nameLayout"
+                ContainerType="Outlined"                                
+                HasError="{Binding User.Errors.[FirstName], Converter={StaticResource NullToVisibilityNone}}"
+                ErrorText="{Binding User.Errors.[FirstName]}"
+                Hint="Name"
+                LeadingViewPosition="Outside">
+                <Entry x:Name="nameEntry" 
+                       Text="{Binding User.FirstName}"
+                       TextColor="White" />
+
+                <inputLayout:SfTextInputLayout.LeadingView>
+                    <Label
+                        TextColor="White"
+                        FontSize="20"
+                        FontFamily="{StaticResource MaterialFontFamily}"
+                        Text="{x:Static constants:IconFont.PermIdentity}">
+                    </Label>
+                </inputLayout:SfTextInputLayout.LeadingView>
+
+            </inputLayout:SfTextInputLayout>
+
+            <inputLayout:SfTextInputLayout
+                x:Name="surnameLayout"
+                ContainerType="Outlined"
+                HasError="{Binding User.Errors.[LastName], Converter={StaticResource NullToVisibilityNone}}"
+                ErrorText="{Binding User.Errors.[LastName]}"
+                Hint="Surname"
+                LeadingViewPosition="Outside">
+                <Entry x:Name="surnameEntry"
+                       Text="{Binding User.LastName}"
+                       TextColor="White" />
+                <inputLayout:SfTextInputLayout.LeadingView>
+                    <Label
+                        TextColor="White"
+                        FontSize="20"
+                        FontFamily="{StaticResource MaterialFontFamily}"
+                        Text="{x:Static constants:IconFont.PermIdentity}">
+                    </Label>
+                </inputLayout:SfTextInputLayout.LeadingView>
+            </inputLayout:SfTextInputLayout>
+
+            <inputLayout:SfTextInputLayout
+                x:Name="nickNameLayout"
+                ContainerType="Outlined"
+                Hint="NickName"
+                HasError="{Binding User.Errors.[NickName], Converter={StaticResource NullToVisibilityNone}}" 
+                ErrorText="{Binding User.Errors.[NickName]}"
+                LeadingViewPosition="Outside">
+                <Entry x:Name="nickNameEntry"
+                       Text="{Binding User.NickName}"
+                       TextColor="White" />
+                <inputLayout:SfTextInputLayout.LeadingView>
+                    <Label
+                        TextColor="White"
+                        FontSize="20"
+                        FontFamily="{StaticResource MaterialFontFamily}"
+                        Text="{x:Static constants:IconFont.Face}">
+                    </Label>
+                </inputLayout:SfTextInputLayout.LeadingView>
+            </inputLayout:SfTextInputLayout>
+
+            <inputLayout:SfTextInputLayout
+                x:Name="passwordLayout"
+                ContainerType="Outlined"
+                Hint="Password"
+                HasError="{Binding User.Errors.[PlainPassword], Converter={StaticResource NullToVisibilityNone}}"                ErrorText="{Binding User.Errors.[PlainPassword]}"
+                EnablePasswordVisibilityToggle="True"
+                LeadingViewPosition="Outside">
+                <Entry x:Name="passwordEntry" 
+                       Text="{Binding User.PlainPassword}"
+                       IsPassword="true" 
+                       TextColor="White" />
+                <inputLayout:SfTextInputLayout.LeadingView>
+                    <Label
+                        TextColor="White"
+                        FontSize="20"
+                        FontFamily="{StaticResource MaterialFontFamily}"
+                        Text="{x:Static constants:IconFont.VpnKey}">
+                    </Label>
+                </inputLayout:SfTextInputLayout.LeadingView>
+            </inputLayout:SfTextInputLayout>
+
+
+            <inputLayout:SfTextInputLayout
+                x:Name="phoneLayout"
+                ContainerType="Outlined"
+                Hint="Téléphone"
+                HasError="{Binding User.Errors.[Phone], Converter={StaticResource NullToVisibilityNone}}"                ErrorText="{Binding User.Errors.[Phone]}"
+
+                LeadingViewPosition="Outside">
+                <Entry x:Name="phoneEntry" 
+                       Text="{Binding User.Phone}"
+                       IsPassword="true" 
+                       TextColor="White" />
+                <inputLayout:SfTextInputLayout.LeadingView>
+                    <Label
+                        TextColor="White"
+                        FontSize="20"
+                        FontFamily="{StaticResource MaterialFontFamily}"
+                        Text="{x:Static constants:IconFont.Phone}">
+                    </Label>
+                </inputLayout:SfTextInputLayout.LeadingView>
+            </inputLayout:SfTextInputLayout>
+
+            <Button BackgroundColor="#1A2634" Command="{Binding RegisterCommand}" TextColor="White" Text="SUBMIT" />
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
